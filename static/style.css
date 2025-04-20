@@ -1,0 +1,267 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to right, #7BCBC8
+    );
+    margin: 0;
+    padding: 0;
+  }
+  
+  .container {
+    max-width: 500px;
+    margin: 60px auto;
+    padding: 30px;
+    background-color: white;
+    border-radius: 16px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  }
+  
+  h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+    color: #444;
+  }
+  
+  input[type="text"],
+  input[type="number"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 15px;
+    box-sizing: border-box;
+    transition: border-color 0.2s;
+  }
+  
+  input:focus {
+    border-color: #4CAF50;
+    outline: none;
+  }
+  
+  button {
+    width: 100%;
+    padding: 14px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+
+  .button-container {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .btn-link {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+  }
+  
+  .btn-link:hover {
+    background-color: #45a049;
+  }
+  
+
+  
+  .alert {
+    padding: 12px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    font-size: 14px;
+  }
+  
+  .alert-success {
+    background-color: #e6f9e6;
+    color: #2e7d32;
+    border: 1px solid #b6e6b6;
+  }
+  
+  .alert-danger {
+    background-color: #ffe6e6;
+    color: #d32f2f;
+    border: 1px solid #f5b5b5;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  th {
+    background-color: #f5f5f5;
+    font-weight: bold;
+  }
+
+  .button-container {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .btn-link {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+  }
+  
+  .btn-link:hover {
+    background-color: #45a049;
+  }
+  
+  /* 表のスタイルもあると見やすくなります */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  th {
+    background-color: #f5f5f5;
+    font-weight: bold;
+  }
+  
+  .center-content {
+    text-align: center;
+    margin-top: 80px;
+  }
+  
+  .center-content h1 {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .center-content p {
+    color: #666;
+    font-size: 16px;
+    margin-bottom: 30px;
+  }
+  
+  .button-group {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  
+  /* .btn-small {
+    display: inline-block;
+    padding: 6px 12px;
+    font-size: 14px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: white;
+  } */
+  .btn-small {
+    display: inline-block;
+    padding: 6px 16px;  /* ← 横幅に余裕を持たせる */
+    font-size: 14px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: white;
+    white-space: nowrap; /* ← 改行させない！ */
+    text-align: center;
+  }
+  
+  
+  .btn-edit {
+    background-color: #1976d2;
+  }
+  
+  .btn-edit:hover {
+    background-color: #1565c0;
+  }
+  
+  .btn-delete {
+    background-color: #e53935;
+  }
+  
+  .btn-delete:hover {
+    background-color: #c62828;
+  }
+  
+  select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 15px;
+    box-sizing: border-box;
+  }
+
+  /* 既存のテーブルスタイル */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th, td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ccc;
+}
+
+th {
+  background-color: #f5f5f5;
+  font-weight: bold;
+}
+
+/* ここに新しいスタイルを追加 */
+table td:nth-child(2) {  /* 材料名 */
+  min-width: 120px;
+}
+
+table td:nth-child(3) {  /* 入出庫数 */
+  min-width: 100px;
+  text-align: right;
+}
+
+table td:nth-child(4) {  /* メモ */
+  min-width: 160px;
+}
+
+table {
+  table-layout: fixed;
+  word-wrap: break-word;
+}
+
+  

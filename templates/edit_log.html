@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>入出庫履歴の編集</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h2>入出庫履歴を編集</h2>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }}">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <form method="POST">
+      <label for="item_id">対象の材料</label>
+      <select name="item_id" id="item_id" required>
+        {% for item in items %}
+          <option value="{{ item[0] }}" {% if item[0] == log[1] %}selected{% endif %}>
+            {{ item[1] }}
+          </option>
+        {% endfor %}
+      </select>
+
+      <label for="change">入出庫数</label>
+      <input type="number" id="change" name="change" value="{{ log[2] }}" required>
+
+      <label for="note">メモ</label>
+      <input type="text" id="note" name="note" value="{{ log[3] or '' }}">
+
+      <button type="submit">更新する</button>
+    </form>
+
+    <div class="button-container">
+      <a href="{{ url_for('logs') }}" class="btn-link">履歴一覧に戻る</a>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>入出庫履歴の登録</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h2>入出庫の記録</h2>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }}">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <form method="POST">
+      <label for="item_id">対象の材料</label>
+      <select name="item_id" id="item_id" required>
+        <option value="">選択してください</option>
+        {% for item in items %}
+          <option value="{{ item[0] }}">{{ item[1] }}</option>
+        {% endfor %}
+      </select>
+
+      <label for="change">入出庫数（例：+10や-5）</label>
+      <input type="number" id="change" name="change" required>
+
+      <label for="note">メモ（任意）</label>
+      <input type="text" id="note" name="note">
+
+      <button type="submit">記録する</button>
+    </form>
+
+    <div class="button-container">
+      <a href="{{ url_for('items') }}" class="btn-link">材料一覧に戻る</a>
+    </div>
+  </div>
+</body>
+</html>

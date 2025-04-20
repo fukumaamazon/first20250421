@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>喫茶店 在庫管理アプリ</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container center-content">
+    <h1>☕ 喫茶店 在庫管理アプリ</h1>
+    <p>ようこそ！在庫管理のホーム画面です。</p>
+
+    <div class="button-group">
+      <a href="{{ url_for('add_item') }}" class="btn-link">材料を登録する</a>
+      <a href="{{ url_for('items') }}" class="btn-link">材料一覧を見る</a>
+    </div>
+  </div>
+</body>
+</html>

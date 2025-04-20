@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>材料一覧 | 喫茶店 在庫管理アプリ</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h2>登録済みの材料一覧</h2>
+
+    {% if items %}
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>材料名</th>
+            <th>初期在庫数</th>
+            <th>編集</th>
+            <th>削除</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in items %}
+            <tr>
+              <td>{{ item[0] }}</td>
+              <td>{{ item[1] }}</td>
+              <td>{{ item[2] }}</td>
+              <td>
+                <a href="{{ url_for('edit_item', item_id=item[0]) }}" class="btn-small btn-edit">編集</a>
+              </td>
+              <td>
+                <a href="{{ url_for('delete_item', item_id=item[0]) }}" class="btn-small btn-delete" onclick="return confirm('本当に削除しますか？');">削除</a>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p>登録されている材料はまだありません。</p>
+    {% endif %}
+
+    <div class="button-container">
+      <a href="{{ url_for('add_item') }}" class="btn-link">材料を追加する</a>
+    </div>
+  </div>
+</body>
+</html>

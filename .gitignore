@@ -1,0 +1,12 @@
+# Python
+__pycache__/
+*.pyc
+
+# SQLite
+*.db
+
+# VScode settings (optional)
+.vscode/
+
+# macOS
+.DS_Store
