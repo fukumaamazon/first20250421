@@ -135,11 +135,9 @@ from datetime import datetime
 @app.route('/add_log', methods=['GET', 'POST'])
 def add_log():
 
-# ===追加したのはここから上===
     if 'user_id' not in session:
         flash("ログインしてください！", "danger")
         return redirect(url_for('index'))
-# ===追加したのはここから下===
 
     conn = sqlite3.connect(DB_PATH)
     c = conn.cursor()
@@ -161,7 +159,7 @@ def add_log():
         conn.commit()
         conn.close()
         flash("入出庫履歴を登録しました。", "success")
-        return redirect(url_for('items'))
+        return redirect(url_for('logs'))
     else:
         c.execute("SELECT id, name FROM items")
         items = c.fetchall()
