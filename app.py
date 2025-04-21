@@ -170,11 +170,11 @@ def add_log():
 @app.route('/logs')
 def logs():
 
-# ===追加したのはここから上===
+# ===追加したのはここから下===
     if 'user_id' not in session:
         flash("ログインしてください！", "danger")
         return redirect(url_for('index'))
-# ===追加したのはここから下===
+# ===追加したのはここから上===
 
     conn = sqlite3.connect(DB_PATH)
     c = conn.cursor()
@@ -263,6 +263,12 @@ from werkzeug.security import generate_password_hash, check_password_hash
 # ===== ユーザー登録画面と処理（強化版） =====
 @app.route('/register', methods=['GET', 'POST'])
 def register():
+
+    # ===実装前の苦肉の策===
+    if request.method == 'GET':
+        return render_template('register_closed.html')
+    # ===ここまで===
+
     conn = sqlite3.connect(DB_PATH)
     c = conn.cursor()
 
