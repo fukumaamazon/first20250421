@@ -214,7 +214,13 @@ def delete_log(log_id):
     conn.close()
     return redirect(url_for('logs'))
 
-from werkzeug.security import generate_password_hash  # パスワードを安全に保存するため
+# パスワードを安全に保存するため
+# 変更前（現在）
+# from werkzeug.security import generate_password_hash
+
+# 変更後（修正）
+from werkzeug.security import generate_password_hash, check_password_hash
+
 
 # ===== ユーザー登録画面と処理（強化版） =====
 @app.route('/register', methods=['GET', 'POST'])

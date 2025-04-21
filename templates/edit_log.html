@@ -21,7 +21,7 @@
       <label for="item_id">対象の材料</label>
       <select name="item_id" id="item_id" required>
         {% for item in items %}
-          <option value="{{ item[0] }}" {% if item[0] = log[1] %}selected{% endif %}>
+          <option value="{{ item[0] }}" {% if item[0] == log[1] %}selected{% endif %}>
             {{ item[1] }}
           </option>
         {% endfor %}
