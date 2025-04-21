@@ -7,7 +7,8 @@ body {
   }
   
   .container {
-    max-width: 500px;
+    max-width: 720px;
+    width: 90%;             /* ← スマホで画面に合わせて縮む */
     margin: 60px auto;
     padding: 30px;
     background-color: white;
@@ -28,17 +29,6 @@ body {
     color: #444;
   }
   
-  /* input[type="text"],
-  input[type="number"] {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    margin-bottom: 20px;
-    font-size: 15px;
-    box-sizing: border-box;
-    transition: border-color 0.2s;
-  } */
 
 input[type="text"],
 input[type="number"],
@@ -76,8 +66,17 @@ input[type="password"] {
   }
 
   .button-container {
-    text-align: center;
-    margin-top: 20px;
+    
+    .button-container {
+      text-align: center;
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 32px;  /* 👈 ボタン間の隙間 */
+    }
+    
+
   }
   
   .btn-link {
@@ -300,3 +299,21 @@ table td:nth-child(4) {  /* 操作（編集・削除） */
 .user-table td {
   text-align: left !important;
 }
+
+@media screen and (max-width: 600px) {
+  .button-group,
+  .button-container {
+    flex-direction: column; /* ボタン縦並びに */
+    gap: 8px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  table th, table td {
+    font-size: 14px;
+    padding: 8px;
+  }
+}
+

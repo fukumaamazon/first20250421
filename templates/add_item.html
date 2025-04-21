@@ -2,6 +2,7 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>材料登録 | 喫茶店管理</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
@@ -28,9 +29,10 @@
 
       <button type="submit">登録する</button>
     </form>
-    <!-- 一覧ページへのボタン -->
+    <!-- ボタン２種類 -->
     <div class="button-container">
-        <a href="{{ url_for('items') }}" class="btn-link">材料一覧を見る</a>
+      <a href="{{ url_for('items') }}" class="btn-link">材料一覧に戻る</a>
+      <a href="{{ url_for('index') }}" class="btn-link">TOPページに戻る</a>  <!-- ← 追加！ -->
     </div>
   
   </div>

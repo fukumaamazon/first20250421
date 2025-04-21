@@ -2,6 +2,7 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>材料一覧 | 喫茶店 在庫管理アプリ</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
@@ -42,6 +43,7 @@
 
     <div class="button-container">
       <a href="{{ url_for('add_item') }}" class="btn-link">材料を追加する</a>
+      <a href="{{ url_for('index') }}" class="btn-link">TOPページに戻る</a>  <!-- ← 追加！ -->
     </div>
   </div>
 </body>

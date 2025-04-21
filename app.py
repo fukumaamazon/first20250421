@@ -16,14 +16,28 @@ def insert_item(name, initial_stock):
     conn.close()
 
 # ===== TOP画面のあれこれ =====
+# @app.route('/')
+# def index():
+#     return render_template('index.html')
 @app.route('/')
 def index():
+    if not session.get('username'):
+        flash("ログインしてください！", "danger")
     return render_template('index.html')
 
 
 # ===== 材料登録画面 =====
 @app.route('/add_item', methods=['GET', 'POST'])
+
+@app.route('/add_item', methods=['GET', 'POST'])
 def add_item():
+    # ===追加したのはここから下===
+    if 'user_id' not in session:
+        flash("ログインしてください！", "danger")
+        return redirect(url_for('index'))
+    # ===追加したのはここから上===
+
+
     if request.method == 'POST':
         name = request.form['name']
         initial_stock = request.form['initial_stock']
@@ -35,9 +49,17 @@ def add_item():
             return redirect(url_for('items'))  # ← 一覧ページにリダイレクト
     return render_template('add_item.html')
 
+
 # ===== 材料一覧表示 =====
 @app.route('/items')
 def items():
+
+# ===追加したのはここから下===
+    if 'user_id' not in session:
+        flash("ログインしてください！", "danger")
+        return redirect(url_for('index'))
+# ===追加したのはここから上===
+
     conn = sqlite3.connect(DB_PATH)
     c = conn.cursor()
     c.execute("SELECT id, name, initial_stock FROM items")
@@ -49,6 +71,10 @@ def items():
 # ===== 材料編集フォームと更新処理 =====
 @app.route('/edit_item/<int:item_id>', methods=['GET', 'POST'])
 def edit_item(item_id):
+# ===追加したのはここから上===
+
+# ===追加したのはここから下===
+
     conn = sqlite3.connect(DB_PATH)
     c = conn.cursor()
 
@@ -108,6 +134,13 @@ from datetime import datetime
 # ===== 入出庫履歴の登録画面と処理 =====
 @app.route('/add_log', methods=['GET', 'POST'])
 def add_log():
+
+# ===追加したのはここから上===
+    if 'user_id' not in session:
+        flash("ログインしてください！", "danger")
+        return redirect(url_for('index'))
+# ===追加したのはここから下===
+
     conn = sqlite3.connect(DB_PATH)
     c = conn.cursor()
 
@@ -138,6 +171,13 @@ def add_log():
 # ======入出庫履歴(logs)の一覧表示======
 @app.route('/logs')
 def logs():
+
+# ===追加したのはここから上===
+    if 'user_id' not in session:
+        flash("ログインしてください！", "danger")
+        return redirect(url_for('index'))
+# ===追加したのはここから下===
+
     conn = sqlite3.connect(DB_PATH)
     c = conn.cursor()
 
@@ -359,4 +399,4 @@ def delete_user(user_id):
 # ===== アプリ起動 =====
 if __name__ == '__main__':
     # app.run(debug=True)
-    app.run(debug=True, port=5050)
+    app.run(debug=True, port=5001)

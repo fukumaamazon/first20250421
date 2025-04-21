@@ -2,6 +2,7 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>入出庫履歴の編集</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
@@ -21,9 +22,13 @@
       <label for="item_id">対象の材料</label>
       <select name="item_id" id="item_id" required>
         {% for item in items %}
+          <!-- <option value="{{ item[0] }}" {% if item[0] == log[1] %}selected{% endif %}>
+            {{ item[1] }}
+          </option> -->
           <option value="{{ item[0] }}" {% if item[0] == log[1] %}selected{% endif %}>
             {{ item[1] }}
           </option>
+          
         {% endfor %}
       </select>
 

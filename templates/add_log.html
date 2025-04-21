@@ -2,6 +2,7 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>入出庫履歴の登録</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
@@ -35,9 +36,13 @@
       <button type="submit">記録する</button>
     </form>
 
+    <!-- ===ボタン２種類=== -->
     <div class="button-container">
+      <a href="{{ url_for('logs') }}" class="btn-link">入出庫履歴一覧を見る</a>  <!-- ← 追加！ -->
       <a href="{{ url_for('items') }}" class="btn-link">材料一覧に戻る</a>
+      <a href="{{ url_for('index') }}" class="btn-link">TOPページに戻る</a>  <!-- ← 追加！ -->
     </div>
+    
   </div>
 </body>
 </html>

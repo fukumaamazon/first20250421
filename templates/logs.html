@@ -2,6 +2,7 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>入出庫履歴一覧</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
@@ -49,6 +50,7 @@
     <div class="button-container">
       <a href="{{ url_for('add_log') }}" class="btn-link">入出庫を記録する</a>
       <a href="{{ url_for('items') }}" class="btn-link">材料一覧に戻る</a>
+      <a href="{{ url_for('index') }}" class="btn-link">TOPページに戻る</a>  <!-- ← 追加！ -->
     </div>
   </div>
 </body>
