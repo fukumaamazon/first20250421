@@ -28,7 +28,7 @@ body {
     color: #444;
   }
   
-  input[type="text"],
+  /* input[type="text"],
   input[type="number"] {
     width: 100%;
     padding: 12px;
@@ -38,7 +38,21 @@ body {
     font-size: 15px;
     box-sizing: border-box;
     transition: border-color 0.2s;
-  }
+  } */
+
+input[type="text"],
+input[type="number"],
+input[type="password"] {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-bottom: 20px;  /* 👈 これがボタンとの隙間になる */
+  font-size: 15px;
+  box-sizing: border-box;
+  transition: border-color 0.2s;
+}
+
   
   input:focus {
     border-color: #4CAF50;

@@ -1,4 +1,5 @@
-from flask import Flask, render_template, request, redirect, flash, url_for
+# from flask import Flask, render_template, request, redirect, flash, url_for
+from flask import Flask, render_template, request, redirect, flash, url_for, session
 import sqlite3
 import os
 
@@ -251,6 +252,37 @@ def register():
 
     conn.close()
     return render_template('register.html')
+
+# ===== ユーザーログイン処理 =====
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+
+        conn = sqlite3.connect(DB_PATH)
+        c = conn.cursor()
+        c.execute("SELECT id, password_hash FROM users WHERE username = ?", (username,))
+        user = c.fetchone()
+        conn.close()
+
+        if user and check_password_hash(user[1], password):
+            session['user_id'] = user[0]
+            session['username'] = username
+            flash("ログインに成功しました。", "success")
+            return redirect(url_for('index'))
+        else:
+            flash("ユーザー名またはパスワードが違います。", "danger")
+            return redirect(url_for('login'))
+
+    return render_template('login.html')
+
+# ===== ログアウト処理 =====
+@app.route('/logout')
+def logout():
+    session.clear()
+    flash("ログアウトしました。", "info")
+    return redirect(url_for('login'))
 
 
 # コードを追加するときはここから上へ
