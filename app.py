@@ -213,9 +213,48 @@ def delete_log(log_id):
     conn.close()
     return redirect(url_for('logs'))
 
+from werkzeug.security import generate_password_hash  # パスワードを安全に保存するため
+
+# ===== ユーザー登録画面と処理 =====
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    conn = sqlite3.connect(DB_PATH)
+    c = conn.cursor()
+
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        role = request.form['role']
+
+        if not username or not password:
+            flash("ユーザー名とパスワードは必須です。", "danger")
+            return redirect(url_for('register'))
+
+        # ハッシュ化して保存
+        password_hash = generate_password_hash(password)
+
+        # 同じユーザー名が登録されていないかチェック
+        c.execute("SELECT id FROM users WHERE username = ?", (username,))
+        if c.fetchone():
+            flash("このユーザー名はすでに使われています。", "danger")
+            conn.close()
+            return redirect(url_for('register'))
+
+        c.execute(
+            "INSERT INTO users (username, password_hash, role) VALUES (?, ?, ?)",
+            (username, password_hash, role)
+        )
+        conn.commit()
+        conn.close()
+        flash("ユーザー登録が完了しました！", "success")
+        return redirect(url_for('index'))
+
+    conn.close()
+    return render_template('register.html')
 
 
 # コードを追加するときはここから上へ
 # ===== アプリ起動 =====
 if __name__ == '__main__':
-    app.run(debug=True)
+    # app.run(debug=True)
+    app.run(debug=True, port=5050)
