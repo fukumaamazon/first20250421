@@ -278,4 +278,25 @@ table {
   word-wrap: break-word;
 }
 
-  
+/* ユーザー一覧用の列幅調整（ID、ユーザー名、ロール、操作） */
+table td:nth-child(1) {  /* ID */
+  width: 60px;
+}
+
+table td:nth-child(2) {  /* ユーザー名 */
+  min-width: 150px;
+}ß
+
+table td:nth-child(3) {  /* 権限（ロール） */
+  min-width: 100px;
+}
+
+table td:nth-child(4) {  /* 操作（編集・削除） */
+  min-width: 180px;
+  text-align: center;
+}
+
+/* ユーザー一覧用テーブルだけ左寄せを強制 */
+.user-table td {
+  text-align: left !important;
+}

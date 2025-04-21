@@ -292,6 +292,68 @@ def logout():
     flash("ログアウトしました。", "info")
     return redirect(url_for('login'))
 
+# ===== ユーザー一覧表示 =====
+@app.route('/users')
+def users():
+    conn = sqlite3.connect(DB_PATH)
+    c = conn.cursor()
+    c.execute("SELECT id, username, role FROM users")
+    users_list = c.fetchall()
+    conn.close()
+    return render_template('users.html', users=users_list)
+
+# ===== ユーザー編集フォームと処理 =====
+@app.route('/edit_user/<int:user_id>', methods=['GET', 'POST'])
+def edit_user(user_id):
+    conn = sqlite3.connect(DB_PATH)
+    c = conn.cursor()
+
+    if request.method == 'POST':
+        username = request.form['username']
+        role = request.form['role']
+
+        if not username:
+            flash("ユーザー名は必須です。", "danger")
+            return redirect(url_for('edit_user', user_id=user_id))
+
+        c.execute("UPDATE users SET username = ?, role = ? WHERE id = ?", (username, role, user_id))
+        conn.commit()
+        conn.close()
+
+        flash("ユーザー情報を更新しました。", "success")
+        return redirect(url_for('users'))
+
+    # GETの場合、編集フォームを表示
+    c.execute("SELECT id, username, role FROM users WHERE id = ?", (user_id,))
+    user = c.fetchone()
+    conn.close()
+
+    if user is None:
+        flash("ユーザーが見つかりません。", "danger")
+        return redirect(url_for('users'))
+
+    return render_template('edit_user.html', user=user)
+
+# ===== ユーザー削除 =====
+@app.route('/delete_user/<int:user_id>')
+def delete_user(user_id):
+    conn = sqlite3.connect(DB_PATH)
+    c = conn.cursor()
+
+    # ユーザーが存在するか確認
+    c.execute("SELECT id FROM users WHERE id = ?", (user_id,))
+    user = c.fetchone()
+
+    if user:
+        c.execute("DELETE FROM users WHERE id = ?", (user_id,))
+        conn.commit()
+        flash("ユーザーを削除しました。", "success")
+    else:
+        flash("ユーザーが見つかりませんでした。", "danger")
+
+    conn.close()
+    return redirect(url_for('users'))
+
 
 # コードを追加するときはここから上へ
 # ===== アプリ起動 =====
