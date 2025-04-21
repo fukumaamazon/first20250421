@@ -216,7 +216,7 @@ def delete_log(log_id):
 
 from werkzeug.security import generate_password_hash  # パスワードを安全に保存するため
 
-# ===== ユーザー登録画面と処理 =====
+# ===== ユーザー登録画面と処理（強化版） =====
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     conn = sqlite3.connect(DB_PATH)
@@ -225,30 +225,32 @@ def register():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        role = request.form['role']
+        role = 'user'  # 必要に応じて 'admin' などに変更可
 
         if not username or not password:
             flash("ユーザー名とパスワードは必須です。", "danger")
             return redirect(url_for('register'))
 
-        # ハッシュ化して保存
-        password_hash = generate_password_hash(password)
-
-        # 同じユーザー名が登録されていないかチェック
+        # すでに同名ユーザーがいるかチェック
         c.execute("SELECT id FROM users WHERE username = ?", (username,))
         if c.fetchone():
             flash("このユーザー名はすでに使われています。", "danger")
             conn.close()
             return redirect(url_for('register'))
 
+        # パスワードをハッシュ化して保存
+        password_hash = generate_password_hash(password)
+
+        # ユーザー登録
         c.execute(
             "INSERT INTO users (username, password_hash, role) VALUES (?, ?, ?)",
             (username, password_hash, role)
         )
         conn.commit()
         conn.close()
-        flash("ユーザー登録が完了しました！", "success")
-        return redirect(url_for('index'))
+
+        flash("✅ 登録完了しました！", "success")
+        return redirect(url_for('login'))
 
     conn.close()
     return render_template('register.html')
