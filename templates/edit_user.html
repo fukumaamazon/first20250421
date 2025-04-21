@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ユーザー編集</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h2>ユーザー編集</h2>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }}">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <form method="POST">
+      <label for="username">ユーザー名</label>
+      <input type="text" id="username" name="username" value="{{ user[1] }}" required>
+
+      <label for="role">権限（例：user, admin）</label>
+      <input type="text" id="role" name="role" value="{{ user[2] }}" required>
+
+      <button type="submit">更新する</button>
+    </form>
+
+    <div class="button-container">
+      <a href="{{ url_for('users') }}" class="btn-link">ユーザー一覧に戻る</a>
+    </div>
+  </div>
+</body>
+</html>

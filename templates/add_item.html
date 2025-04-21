@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>材料登録 | 喫茶店管理</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h2>材料の登録</h2>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }}">
+            {{ message }}
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <form method="POST">
+      <label for="name">材料名</label>
+      <input type="text" id="name" name="name" placeholder="例: コーヒー豆" required>
+
+      <label for="initial_stock">初期在庫数</label>
+      <input type="number" id="initial_stock" name="initial_stock" min="0" required>
+
+      <button type="submit">登録する</button>
+    </form>
+    <!-- ボタン２種類 -->
+    <div class="button-container">
+      <a href="{{ url_for('items') }}" class="btn-link">材料一覧に戻る</a>
+      <a href="{{ url_for('index') }}" class="btn-link">TOPページに戻る</a>  <!-- ← 追加！ -->
+    </div>
+  
+  </div>
+</body>
+</html>

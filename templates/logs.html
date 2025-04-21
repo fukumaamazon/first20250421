@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>入出庫履歴一覧</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h2>入出庫履歴一覧</h2>
+
+    {% if logs %}
+      <table>
+        <thead>
+          <tr>
+            <th>日時</th>
+            <th>材料名</th>
+            <th>入出庫数</th>
+            <th>メモ</th>
+            <th>編集</th>
+            <th>削除</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for log in logs %}
+          
+          <tr>
+            <td>{{ log[1] }}</td>  <!-- timestamp -->
+            <td>{{ log[2] }}</td>  <!-- 材料名 -->
+            <td>{{ log[3] }}</td>  <!-- 入出庫数 -->
+            <td>{{ log[4] }}</td>  <!-- メモ -->
+          
+            <td>
+              <a href="{{ url_for('edit_log', log_id=log[0]) }}" class="btn-small btn-edit">編集</a>
+            </td>
+            <td>
+              <a href="{{ url_for('delete_log', log_id=log[0]) }}" class="btn-small btn-delete"
+                 onclick="return confirm('本当に削除しますか？');">削除</a>
+            </td>
+          </tr>
+          
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p>まだ入出庫の記録はありません。</p>
+    {% endif %}
+
+    <div class="button-container">
+      <a href="{{ url_for('add_log') }}" class="btn-link">入出庫を記録する</a>
+      <a href="{{ url_for('items') }}" class="btn-link">材料一覧に戻る</a>
+      <a href="{{ url_for('index') }}" class="btn-link">TOPページに戻る</a>  <!-- ← 追加！ -->
+    </div>
+  </div>
+</body>
+</html>

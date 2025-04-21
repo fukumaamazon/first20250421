@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>喫茶店 在庫管理アプリ</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container center-content">
+    <h1>☕ 喫茶店 在庫管理アプリ</h1>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <div class="alert alert-{{ category }}">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+
+    <!-- ログイン中のユーザー名を表示 -->
+    {% if session.get('username') %}
+      <p>ようこそ！<strong>{{ session['username'] }}</strong> さん！！</p>
+    {% else %}
+      <p>ようこそ！ゲストさん！</p>
+    {% endif %}
+
+    <div class="button-group">
+      <a href="{{ url_for('add_item') }}" class="btn-link">材料を登録する</a>
+      <a href="{{ url_for('items') }}" class="btn-link">材料一覧を見る</a>
+      <a href="{{ url_for('add_log') }}" class="btn-link">入出庫を記録する</a>
+      <a href="{{ url_for('logs') }}" class="btn-link">入出庫履歴を見る</a>
+      {% if session.get('username') %}
+        <a href="{{ url_for('logout') }}" class="btn-link">ログアウト</a>
+      {% else %}
+        <a href="{{ url_for('login') }}" class="btn-link">ログイン</a>
+      {% endif %}
+    </div>
+  </div>
+</body>
+</html>
